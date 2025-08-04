@@ -301,11 +301,15 @@ function Home() {
 
       {/* Floating Contact Button */}
       <div className="fixed bottom-6 right-6 z-50">
-        <button className="group bg-green-500 hover:bg-green-600 text-white w-16 h-16 rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 transform hover:scale-110">
-          <svg className="w-8 h-8" viewBox="0 0 32 32" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-            <path d="M16 3C9.373 3 4 8.373 4 15c0 2.385.668 4.607 1.938 6.563L4 29l7.688-1.938A12.93 12.93 0 0016 27c6.627 0 12-5.373 12-12S22.627 3 16 3zm0 22.917c-2.09 0-4.13-.547-5.91-1.583l-.423-.25-4.563 1.146 1.188-4.438-.275-.434C5.547 18.13 5 16.59 5 15c0-6.065 4.935-11 11-11s11 4.935 11 11-4.935 11-11 11zm6.01-7.26c-.33-.165-1.95-.963-2.25-1.073-.3-.11-.52-.165-.74.165-.22.33-.85 1.073-1.04 1.293-.19.22-.38.247-.71.082-.33-.165-1.39-.513-2.65-1.635-.98-.872-1.64-1.948-1.83-2.278-.19-.33-.02-.508.145-.673.15-.15.33-.39.495-.585.165-.195.22-.33.33-.55.11-.22.055-.413-.027-.578-.082-.165-.74-1.78-1.01-2.44-.267-.64-.54-.55-.74-.56-.19-.008-.413-.01-.635-.01-.22 0-.578.082-.88.413-.3.33-1.15 1.123-1.15 2.74 0 1.617 1.18 3.18 1.345 3.4.165.22 2.32 3.55 5.63 4.83.788.31 1.403.495 1.883.633.792.225 1.513.193 2.08.117.635-.082 1.95-.797 2.23-1.566.275-.77.275-1.43.192-1.566-.082-.137-.3-.22-.63-.385z"/>
-          </svg>
-        </button>
+        <a
+          href="https://wa.me/9686748741"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group hover:bg-green-600 text-white w-12 h-12 rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 transform hover:scale-110"
+          aria-label="Contact on WhatsApp"
+        >
+          <img src="/WhatsApp.svg.webp" alt="WhatsApp" className="w-18 h-18" />
+        </a>
       </div>
     </div>
   );

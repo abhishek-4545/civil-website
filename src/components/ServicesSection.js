@@ -160,8 +160,9 @@ function ServicesSection({ refProp, visible }) {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="mb-2 text-orange-600 font-semibold tracking-widest uppercase text-sm text-center">Our Services</h2>
-          <p className="text-black font-bold text-2xl md:text-3xl mb-4">Comprehensive solutions for construction, renovation, and all your property maintenance needs.Delivered by experts you can trust.</p>
+          <h2 className="mb-2 text-yellow-500 font-bold text-4xl md:text-3xl text-center uppercase tracking-wider">Our Services</h2>
+          <p className="text-black font-semibold text-base md:text-lg mb-4">"Expert solutions for construction, renovation, and property maintenance you can trust."
+</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -174,7 +175,7 @@ function ServicesSection({ refProp, visible }) {
               <h3 className="text-xl font-bold text-gray-800 mb-3">{service.title}</h3>
               <p className="text-gray-600 mb-2">{service.description}</p>
               <button
-                className="text-yellow-600 font-semibold hover:text-yellow-700 transition-colors duration-300 mb-4"
+                className="text-yellow-600 font-semibold hover:text-yellow-700  mb-4"
                 type="button"
                 tabIndex={0}
                 aria-label={`Learn more about ${service.title}`}
@@ -190,44 +191,82 @@ function ServicesSection({ refProp, visible }) {
         {/* Modal popup for service details */}
         {modalIndex !== null && ReactDOM.createPortal(
           <div
-            className="fixed inset-0 z-[99999] flex items-center justify-center bg-black/60 transition-opacity duration-300"
+            className="fixed inset-0 z-[99999] flex items-center justify-center"
             onClick={() => setModalIndex(null)}
           >
+            {/* Blurred gold background overlay with smooth fade/scale */}
+            <div className="absolute inset-0 pointer-events-none animate-gold-bg-fade" style={{
+              background: 'radial-gradient(circle at 50% 50%, rgba(255,215,0,0.25) 0%, rgba(255,215,0,0.18) 40%, rgba(255,215,0,0.10) 70%, transparent 100%)',
+              filter: 'blur(16px)',
+              zIndex: 0
+            }} />
             <div
-              className="bg-white rounded-2xl shadow-3xl border-2 border-yellow-500 max-w-2xl w-full mx-auto p-6 sm:p-8 relative animate-fade-in service-popup"
-              style={{
-                maxHeight: '90vh',
-                overflowY: 'auto',
-                transition: 'transform 0.3s cubic-bezier(0.4,0,0.2,1), opacity 0.3s cubic-bezier(0.4,0,0.2,1)',
-                transform: 'scale(1)',
-                opacity: 1,
-              }}
+              className="relative flex items-center justify-center animate-slide-gold-pop"
+              style={{ minWidth: 320, zIndex: 1, animation: 'slideGoldPop 1s cubic-bezier(0.4,0,0.2,1)' }}
               onClick={e => e.stopPropagation()}
             >
-              <button
-                className="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-2xl font-bold"
-                onClick={() => setModalIndex(null)}
-                aria-label="Close"
+              
+              <div
+                className="bg-white rounded-2xl shadow-3xl border-2 border-yellow-500 max-w-2xl w-full mx-auto p-6 sm:p-8 relative animate-slide-gold-inner"
+                style={{
+                  zIndex: 2,
+                  minWidth: 320,
+                  maxHeight: '90vh',
+                  overflowY: 'auto',
+                  animation: 'slideGoldInner 1.1s cubic-bezier(0.4,0,0.2,1) 0.08s'
+                }}
               >
-                &times;
-              </button>
-              <div className="text-5xl mb-4 text-center">{services[modalIndex].icon}</div>
-              <h3 className="text-2xl font-bold text-gray-800 mb-3 text-center">{services[modalIndex].title}</h3>
-              <div className="text-gray-700 text-base mb-4 leading-relaxed text-center break-words font-medium">
-                {services[modalIndex].longDescription}
+                <button
+                  className="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-2xl font-bold"
+                  onClick={() => setModalIndex(null)}
+                  aria-label="Close"
+                >
+                  &times;
+                </button>
+                <div className="text-5xl mb-4 text-center">{services[modalIndex].icon}</div>
+                <h3 className="text-2xl font-bold text-gray-800 mb-3 text-center">{services[modalIndex].title}</h3>
+                <div className="text-gray-700 text-base mb-4 leading-relaxed text-center break-words font-medium">
+                  {services[modalIndex].longDescription}
+                </div>
+                <hr className="my-3 border-gray-300 w-full" />
+                <ul className="list-disc list-inside text-gray-800 text-base space-y-2 pl-4 text-left font-normal w-full">
+                  {services[modalIndex].bullets.map((point, i) => (
+                    <li key={i}>{point}</li>
+                  ))}
+                </ul>
+                <button
+                  className="mt-6 w-full bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-3 px-6 rounded-lg shadow transition-all duration-200 text-lg"
+                  onClick={() => navigate('/callback')}
+                >
+                  Request Callback
+                </button>
               </div>
-              <hr className="my-3 border-gray-300 w-full" />
-              <ul className="list-disc list-inside text-gray-800 text-base space-y-2 pl-4 text-left font-normal w-full">
-                {services[modalIndex].bullets.map((point, i) => (
-                  <li key={i}>{point}</li>
-                ))}
-              </ul>
-              <button
-                className="mt-6 w-full bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-3 px-6 rounded-lg shadow transition-all duration-200 text-lg"
-                onClick={() => navigate('/callback')}
-              >
-                Request Callback
-              </button>
+              {/* Gold popup animation keyframes and overlay fade/scale */}
+              <style>{`
+                @keyframes slideGoldPop {
+                  0% { opacity: 0; transform: translateY(120px) scale(0.7); }
+                  60% { opacity: 1; transform: translateY(-12px) scale(1.07); }
+                  100% { opacity: 1; transform: translateY(0) scale(1); }
+                }
+                @keyframes slideGoldInner {
+                  0% { opacity: 0; transform: translateY(80px) scale(0.8); }
+                  60% { opacity: 1; transform: translateY(-6px) scale(1.05); }
+                  100% { opacity: 1; transform: translateY(0) scale(1); }
+                }
+                @keyframes goldShadowPulse {
+                  0%, 100% { box-shadow: 0 0 90px 36px rgba(255,215,0,0.95), 0 0 0 14px #ffd700; }
+                  50% { box-shadow: 0 0 120px 60px rgba(255,215,0,1), 0 0 0 20px #ffd700; }
+                }
+                @keyframes goldBgFade {
+                  0% { opacity: 0; transform: scale(1.1); }
+                  100% { opacity: 1; transform: scale(1); }
+                }
+                .animate-slide-gold-pop { animation: slideGoldPop 1s cubic-bezier(0.4,0,0.2,1); }
+                .animate-slide-gold-inner { animation: slideGoldInner 1.1s cubic-bezier(0.4,0,0.2,1) 0.06s; }
+                .animate-gold-shadow-pulse { animation: goldShadowPulse 2.2s infinite cubic-bezier(0.4,0,0.2,1); }
+                .animate-gold-bg-fade { animation: goldBgFade 0.7s cubic-bezier(0.4,0,0.2,1); }
+                .animate-popup-overlay { animation: goldBgFade 0.5s cubic-bezier(0.4,0,0.2,1); }
+              `}</style>
             </div>
           </div>,
           document.body

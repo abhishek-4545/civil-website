@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 // ServicesSection import removed from Home.js
+import TestimonialsSection from "./components/TestimonialsSection";
 
 // Intersection Observer for scroll-reveal
 function useSectionInView() {
@@ -37,12 +38,8 @@ function Home() {
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center">
           {/* Logo */}
           <div className="flex items-center mb-4 md:mb-0">
-            <div className="w-12 h-12 bg-yellow-500 rounded-lg flex items-center justify-center mr-4 shadow-lg">
-              <svg className="w-7 h-7 text-yellow-700" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd" />
-              </svg>
-            </div>
-            <span className="text-gray-800 text-3xl font-bold">Vijay Civil Works</span>
+            <img src="/logo3.png" alt="Vijay Civil Works Logo" className="w-12 h-12 mr-4 rounded-lg border-2 border-white object-contain" />
+            <span className="text-gray-600 text-3xl font-bold">Vijay Civil Works</span>
           </div>
           {/* Info Items */}
           <div className="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-10">
@@ -58,13 +55,6 @@ function Home() {
               <div>
                 <div className="text-xs text-gray-500">Phone Number</div>
                 <div className="font-semibold text-gray-800">+1 (555) 123-4567</div>
-              </div>
-            </div>
-            <div className="flex items-center space-x-2">
-            <svg className="w-6 h-6 text-yellow-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
-              <div>
-                <div className="text-xs text-gray-500">Office Address</div>
-                <div className="font-semibold text-gray-800">123 Main St, City, State 12345</div>
               </div>
             </div>
           </div>
@@ -118,37 +108,14 @@ function Home() {
             {/* Left Content */}
             <div className="space-y-8">
               <div className="space-y-4">
-                <div className="inline-flex items-center px-4 py-2 bg-yellow-100 rounded-full text-yellow-800 text-sm font-medium">
-                  <span className="w-2 h-2 bg-yellow-500 rounded-full mr-2 animate-pulse"></span>
-                  Professional Civil Construction Services
-                </div>
-                <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">
-                  <span className="text-gray-800">
-                    Building
-                  </span>
-                  <br />
-                  <span className="text-yellow-600">
-                    Dreams
-                  </span>
-                  <br />
-                  <span className="text-gray-800">
-                    Together
-                  </span>
+                <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight text-left text-blue-100" style={{ color: '#3b82f6' }}>
+                  <span className="block text-yellow-500" style={{ color: '#BA8A00' }}>We Build. We Fix. We Upgrade.</span>
                 </h1>
               </div>
               
-              <p className="text-xl text-gray-600 leading-relaxed max-w-lg">
-                Professional civil construction services for residential and commercial projects. Quality construction, timely delivery, and excellence in every project.
+              <p className="text-lg md:text-xl text-gray-700 font-medium max-w-2xl text-left">
+                Ghar Se Ghar Tak — Complete Civil Solutions. Quality craftsmanship, reliable service, and competitive pricing for all your construction needs.
               </p>
-              {/* Inspirational Quote and Civil Work Description */}
-              <div className="bg-yellow-50 py-8 px-4 shadow-inner">
-                <div className="max-w-3xl mx-auto text-center">
-                  <blockquote className="text-2xl italic font-semibold text-yellow-800 mb-4">“Great buildings begin with a strong foundation and a vision for the future.”</blockquote>
-                  <p className="text-gray-700 text-lg max-w-2xl mx-auto">
-                    Civil work is the backbone of modern infrastructure, encompassing the design, construction, and maintenance of buildings, roads, bridges, and essential facilities. Our expertise ensures every project is built to last, combining quality craftsmanship with innovative solutions for a better tomorrow.
-                  </p>
-                </div>
-              </div>
               
 
               {/* Contact Info */}
@@ -187,49 +154,48 @@ function Home() {
       <div className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <span className="inline-block bg-yellow-200 text-yellow-800 font-bold px-4 py-2 rounded-full text-lg mb-4">🛠️</span>
-            <h2 className="mb-2 text-orange-600 font-semibold tracking-widest uppercase text-sm text-center">Why Choose Us</h2>
-            <p className="text-black font-bold text-2xl md:text-3xl mb-4">Experience quality, reliability, and expert solutions for every project.<br/>Our dedicated team ensures your satisfaction from start to finish.</p>
+            <span className="inline-block bg-yellow-200 text-yellow-500 font-bold px-4 py-2 rounded-full text-lg mb-4">🛠️</span>
+            <h2 className="mb-2 text-yellow-500 font-bold text-4xl md:text-3xl text-center uppercase tracking-wider">WHY CHOOSE US</h2>
+            <p className="text-black font-semibold text-base md:text-lg mb-4">We deliver reliable, affordable, and customized civil solutions for your every need.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-200 flex flex-col items-center text-center">
+            <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-200 flex flex-col items-center text-center transition-transform duration-300 hover:scale-105 hover:shadow-2xl hover:border-yellow-400 cursor-pointer">
               <span className="text-3xl mb-4">✅</span>
               <h3 className="text-xl font-bold mb-2">All-in-One Services</h3>
               <p className="text-gray-600">From plumbing and electrical work to painting, tiling, event lighting, and full-scale renovations — we cover it all under one roof.</p>
             </div>
-            <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-200 flex flex-col items-center text-center">
-              <span className="text-3xl mb-4">✅</span>
+            <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-200 flex flex-col items-center text-center transition-transform duration-300 hover:scale-105 hover:shadow-2xl hover:border-yellow-400 cursor-pointer">
+              <span className="text-3xl mb-4">💰</span>
               <h3 className="text-xl font-bold mb-2">Affordable & Transparent Pricing</h3>
               <p className="text-gray-600">We believe in fair prices with no hidden costs. Quality work doesn’t have to come at a premium.</p>
             </div>
-            <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-200 flex flex-col items-center text-center">
-              <span className="text-3xl mb-4">✅</span>
+            <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-200 flex flex-col items-center text-center transition-transform duration-300 hover:scale-105 hover:shadow-2xl hover:border-yellow-400 cursor-pointer">
+              <span className="text-3xl mb-4">🧑‍�</span>
               <h3 className="text-xl font-bold mb-2">Skilled & Experienced Team</h3>
               <p className="text-gray-600">Our professionals are trained, certified, and experienced across multiple trades to deliver top-notch workmanship.</p>
             </div>
-            <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-200 flex flex-col items-center text-center">
-              <span className="text-3xl mb-4">✅</span>
+            <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-200 flex flex-col items-center text-center transition-transform duration-300 hover:scale-105 hover:shadow-2xl hover:border-yellow-400 cursor-pointer">
+              <span className="text-3xl mb-4">⏱️</span>
               <h3 className="text-xl font-bold mb-2">On-Time Project Delivery</h3>
               <p className="text-gray-600">We respect your time and commitments. Our team ensures punctual delivery without compromising on quality.</p>
             </div>
-            <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-200 flex flex-col items-center text-center">
-              <span className="text-3xl mb-4">✅</span>
+            <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-200 flex flex-col items-center text-center transition-transform duration-300 hover:scale-105 hover:shadow-2xl hover:border-yellow-400 cursor-pointer">
+              <span className="text-3xl mb-4">🎯</span>
               <h3 className="text-xl font-bold mb-2">Customized Solutions</h3>
               <p className="text-gray-600">Every space is unique. We tailor our services to meet your specific needs and vision.</p>
             </div>
-            <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-200 flex flex-col items-center text-center">
-              <span className="text-3xl mb-4">✅</span>
-              <h3 className="text-xl font-bold mb-2">Reliable Customer Support</h3>
-              <p className="text-gray-600">We’re always just a call away — whether it’s a new project, a repair, or post-service support.</p>
-            </div>
-            <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-200 flex flex-col items-center text-center">
-              <span className="text-3xl mb-4">✅</span>
+            <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-200 flex flex-col items-center text-center transition-transform duration-300 hover:scale-105 hover:shadow-2xl hover:border-yellow-400 cursor-pointer">
+              <span className="text-3xl mb-4">🔒</span>
               <h3 className="text-xl font-bold mb-2">Quality Materials & Tools</h3>
               <p className="text-gray-600">We use only trusted materials and the latest tools to ensure lasting results.</p>
             </div>
           </div>
         </div>
       </div>
+
+
+
+      <TestimonialsSection />
 
       {/* Services Section removed: now on its own page */}
 
@@ -335,9 +301,9 @@ function Home() {
 
       {/* Floating Contact Button */}
       <div className="fixed bottom-6 right-6 z-50">
-        <button className="group bg-yellow-600 hover:bg-yellow-700 text-white w-16 h-16 rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 transform hover:scale-110">
-          <svg className="w-7 h-7 group-hover:rotate-12 transition-transform duration-300" fill="currentColor" viewBox="0 0 20 20">
-            <path fillRule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clipRule="evenodd" />
+        <button className="group bg-green-500 hover:bg-green-600 text-white w-16 h-16 rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 transform hover:scale-110">
+          <svg className="w-8 h-8" viewBox="0 0 32 32" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path d="M16 3C9.373 3 4 8.373 4 15c0 2.385.668 4.607 1.938 6.563L4 29l7.688-1.938A12.93 12.93 0 0016 27c6.627 0 12-5.373 12-12S22.627 3 16 3zm0 22.917c-2.09 0-4.13-.547-5.91-1.583l-.423-.25-4.563 1.146 1.188-4.438-.275-.434C5.547 18.13 5 16.59 5 15c0-6.065 4.935-11 11-11s11 4.935 11 11-4.935 11-11 11zm6.01-7.26c-.33-.165-1.95-.963-2.25-1.073-.3-.11-.52-.165-.74.165-.22.33-.85 1.073-1.04 1.293-.19.22-.38.247-.71.082-.33-.165-1.39-.513-2.65-1.635-.98-.872-1.64-1.948-1.83-2.278-.19-.33-.02-.508.145-.673.15-.15.33-.39.495-.585.165-.195.22-.33.33-.55.11-.22.055-.413-.027-.578-.082-.165-.74-1.78-1.01-2.44-.267-.64-.54-.55-.74-.56-.19-.008-.413-.01-.635-.01-.22 0-.578.082-.88.413-.3.33-1.15 1.123-1.15 2.74 0 1.617 1.18 3.18 1.345 3.4.165.22 2.32 3.55 5.63 4.83.788.31 1.403.495 1.883.633.792.225 1.513.193 2.08.117.635-.082 1.95-.797 2.23-1.566.275-.77.275-1.43.192-1.566-.082-.137-.3-.22-.63-.385z"/>
           </svg>
         </button>
       </div>

@@ -1,119 +1,133 @@
 import React, { useState } from "react";
+import { db } from "../firebase";
+import { collection, addDoc } from "firebase/firestore";
 
 function CallbackForm() {
-  const [form, setForm] = useState({
+  const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
-    address: "",
-    serviceType: ""
+    message: ""
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState("");
 
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission logic here
-    alert("Callback request submitted!");
+    setIsSubmitting(true);
+    setSubmitStatus("");
+
+    try {
+      // Add form data to Firestore
+      const docRef = await addDoc(collection(db, "callback-requests"), {
+        ...formData,
+        timestamp: new Date(),
+        status: "pending"
+      });
+      
+      console.log("Form submitted with ID: ", docRef.id);
+      setSubmitStatus("success");
+      setFormData({ name: "", email: "", phone: "", message: "" });
+    } catch (error) {
+      console.error("Error submitting form: ", error);
+      setSubmitStatus("error");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
-    <div className="min-h-screen bg-white flex flex-col items-center justify-start pt-16 px-2">
-      <div className="w-full max-w-4xl">
-        <h1 className="text-4xl md:text-5xl font-extrabold text-center text-gray-800 mb-2 mt-8">
-          Request for <span className="text-yellow-600">Callback</span>
-        </h1>
-        <p className="text-lg text-center text-gray-700 mb-8 max-w-2xl mx-auto">
-          Schedule a callback from our experts. Fill out the form below and we'll call you back within 24 hours.
-        </p>
-        <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-xl p-8 md:p-12 mb-8 border border-gray-100">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-            <div>
-              <label className="block text-gray-700 font-semibold mb-2">Full Name *</label>
-              <input
-                type="text"
-                name="name"
-                value={form.name}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-3 rounded-lg bg-white text-gray-900 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-yellow-400"
-                placeholder="Enter your full name"
-              />
-            </div>
-            <div>
-              <label className="block text-gray-700 font-semibold mb-2">Email Address *</label>
-              <input
-                type="email"
-                name="email"
-                value={form.email}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-3 rounded-lg bg-white text-gray-900 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-yellow-400"
-                placeholder="Enter your email"
-              />
-            </div>
-            <div>
-              <label className="block text-gray-700 font-semibold mb-2">Phone Number *</label>
-              <input
-                type="tel"
-                name="phone"
-                value={form.phone}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-3 rounded-lg bg-white text-gray-900 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-yellow-400"
-                placeholder="Enter your phone number"
-              />
-            </div>
-            <div>
-              <label className="block text-gray-700 font-semibold mb-2">Service Address *</label>
-              <input
-                type="text"
-                name="address"
-                value={form.address}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-3 rounded-lg bg-white text-gray-900 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-yellow-400"
-                placeholder="Enter service address"
-              />
-            </div>
-          </div>
-          <div className="mb-6">
-            <label className="block text-gray-700 font-semibold mb-2">Service Type *</label>
-            <select
-              name="serviceType"
-              value={form.serviceType}
-              onChange={handleChange}
-              required
-              className="w-full px-4 py-3 rounded-lg bg-white text-gray-900 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-yellow-400"
-            >
-              <option value="">Select service type</option>
-              <option value="Construction">Construction</option>
-              <option value="Electrical">Electrical</option>
-              <option value="Plumbing">Plumbing</option>
-              <option value="Painting">Painting</option>
-              <option value="Renovation">Renovation</option>
-              <option value="Other">Other</option>
-            </select>
-          </div>
-          <button
-            type="submit"
-            className="w-full py-3 rounded-lg bg-yellow-500 hover:bg-yellow-600 text-white font-bold text-lg shadow transition-all duration-300"
-          >
-            Submit Request
-          </button>
-        </form>
-        <div className="bg-white rounded-2xl shadow-lg p-6 md:p-8 text-gray-800 border border-gray-100">
-          <h2 className="text-xl font-bold mb-3">What to Expect:</h2>
-          <ul className="list-disc list-inside space-y-2 text-gray-700">
-            <li>Callback within 24 hours</li>
-            <li>Expert consultation over the phone</li>
-            <li>Licensed and insured professionals</li>
-            <li>No obligation to proceed</li>
-          </ul>
+    <div className="bg-white p-8 rounded-lg shadow-lg max-w-md mx-auto">
+      <h2 className="text-2xl font-bold text-gray-800 mb-6">Request a Callback</h2>
+      
+      {submitStatus === "success" && (
+        <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
+          Thank you! We'll get back to you soon.
         </div>
-      </div>
+      )}
+      
+      {submitStatus === "error" && (
+        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+          Something went wrong. Please try again.
+        </div>
+      )}
+
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div>
+          <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+            Name
+          </label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            required
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+
+        <div>
+          <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+            Email
+          </label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+
+        <div>
+          <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
+            Phone
+          </label>
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            value={formData.phone}
+            onChange={handleChange}
+            required
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+
+        <div>
+          <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
+            Message
+          </label>
+          <textarea
+            id="message"
+            name="message"
+            value={formData.message}
+            onChange={handleChange}
+            rows="4"
+            required
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          {isSubmitting ? "Submitting..." : "Submit Request"}
+        </button>
+      </form>
     </div>
   );
 }
